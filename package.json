@@ -2,16 +2,23 @@
   "name": "MultiEnvApp",
   "version": "0.0.1",
   "private": true,
+ 
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "android": "react-native run-android --mode=prodDebug",
+    "android:dev": "react-native run-android --mode=devDebug",
+    "android:staging": "react-native run-android --mode=stagingDebug",
+    "android:prod": "react-native run-android --mode=prodDebug",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "clean": "cd android && ./gradlew clean && cd ..",
+    "doctor": "npx react-native doctor"
   },
+
   "dependencies": {
     "react": "19.0.0",
-    "react-native": "0.79.2"
+    "react-native": "0.79.2",
+    "react-native-config": "^1.5.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

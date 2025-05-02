@@ -1,3 +1,9 @@
+project.ext.envConfigFiles = [
+    dev: ".env.dev",
+    staging: ".env.staging",
+    prod: ".env.prod"
+]
+
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
@@ -84,7 +90,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        resValue "string", "build_config_package", "com.multienvapp"
     }
+    
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -93,6 +101,33 @@ android {
             keyPassword 'android'
         }
     }
+    
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            dimension "default"
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "MyApp Dev"
+        }
+        staging {
+            dimension "default"
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-staging"
+            resValue "string", "app_name", "MyApp Staging"
+        }
+        prod {
+            dimension "default"
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "app_name", "MyApp"
+        }
+    }
+    
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -117,3 +152,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
