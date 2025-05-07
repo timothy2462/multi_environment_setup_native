@@ -5,7 +5,6 @@ import Config from 'react-native-config';
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  // Determine environment message and background color
   let envMessage = '';
   let backgroundColor = '';
 
@@ -20,7 +19,7 @@ function App(): React.JSX.Element {
       break;
     case 'production':
       envMessage = 'Hurray this app is live and you are on production environment';
-      backgroundColor = 'purple'; // You didn't specify a color for prod, using purple as an example
+      backgroundColor = 'purple'; 
       break;
     default:
       envMessage = `Unknown environment: ${Config.APP_ENV}`;
