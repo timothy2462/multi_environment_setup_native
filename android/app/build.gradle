@@ -1,10 +1,14 @@
+apply plugin: "com.android.application"
+
 project.ext.envConfigFiles = [
     dev: ".env.dev",
     staging: ".env.staging",
     prod: ".env.prod"
 ]
 
-apply plugin: "com.android.application"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
@@ -109,22 +113,25 @@ android {
             minSdkVersion rootProject.ext.minSdkVersion
             targetSdkVersion rootProject.ext.targetSdkVersion
             applicationIdSuffix ".dev"
+            // applicationId "com.multienvapp.dev"
             versionNameSuffix "-dev"
-            resValue "string", "app_name", "MyApp Dev"
+        resValue "string", "build_config_package", "com.multienvapp"
         }
         staging {
             dimension "default"
             minSdkVersion rootProject.ext.minSdkVersion
             targetSdkVersion rootProject.ext.targetSdkVersion
+        //  applicationId "com.multienvapp.staging"
             applicationIdSuffix ".staging"
             versionNameSuffix "-staging"
-            resValue "string", "app_name", "MyApp Staging"
+        resValue "string", "build_config_package", "com.multienvapp"
         }
         prod {
             dimension "default"
             minSdkVersion rootProject.ext.minSdkVersion
             targetSdkVersion rootProject.ext.targetSdkVersion
-            resValue "string", "app_name", "MyApp"
+            //  applicationId "com.multienvapp.prod"
+        resValue "string", "build_config_package", "com.multienvapp"
         }
     }
     

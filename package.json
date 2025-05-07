@@ -5,9 +5,9 @@
  
   "scripts": {
     "android": "react-native run-android --mode=prodDebug",
-    "android:dev": "react-native run-android --mode=devDebug",
-    "android:staging": "react-native run-android --mode=stagingDebug",
-    "android:prod": "react-native run-android --mode=prodDebug",
+    "android:dev": "react-native run-android --mode=devDebug --appIdSuffix=dev",
+    "android:staging": "react-native run-android --mode=stagingDebug --appIdSuffix=staging",
+    "android:prod": "react-native run-android --mode=prodDebug  --appIdSuffix=prod",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
